@@ -1,7 +1,7 @@
 from datetime import datetime
 
-from sqlalchemy import Column, BigInteger, DateTime, Integer, Sequence, Enum
-from tornado_sqlalchemy import SQLAlchemy, SessionMixin
+from sqlalchemy import Column, DateTime, Integer, Enum
+from tornado_sqlalchemy import SQLAlchemy
 
 from models.area import AreaName
 
@@ -13,8 +13,7 @@ class TimeSlot(db.Model):
     area = Column(Enum(AreaName))
     check_in_at = Column(DateTime)
     free_spots = Column(Integer)
-    bookings_count = Column(Integer)
-    spots_count = Column(Integer)
+    capacity = Column(Integer)
     created_at = Column(DateTime, default=datetime.utcnow)
 
     def __repr__(self):

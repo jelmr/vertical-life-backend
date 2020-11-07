@@ -43,8 +43,7 @@ class VerticalLifeClient:
                 area=area_name,
                 check_in_at=date_parser.parse(slot['slot']['check_in_at']),
                 free_spots=slot['free_spots'],
-                bookings_count=slot['slot']['bookings_count'],
-                spots_count=slot['slot']['spots_count']
+                capacity=area.capacity
             )
             for slot
             in data['slots']
