@@ -29,7 +29,7 @@ class Scraper(object):
     async def scrape(self):
         while True:
             print('I sleep zzzz')
-            time.sleep(30 * 60)
+            time.sleep(60 * 60)
 
             print('real shit')
             session = sessionmaker(bind=self.db.engine)()
@@ -40,7 +40,7 @@ class Scraper(object):
                     print("Getting ", area.value, date.strftime('%Y/%m/%d'))
                     timeslots = await self.vl_client.get_time_slots(area, date)
                     session.add_all(timeslots)
-                    time.sleep(random.randint(2, 4))
+                    time.sleep(random.randint(5, 10))
 
             session.commit()
             session.flush()

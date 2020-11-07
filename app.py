@@ -63,7 +63,7 @@ if __name__ == "__main__":
 
     if args.scrape:
         scraper = Scraper()
-        
+
     app = make_app()
     port = args.port
     print(f'Listening on port {port}')
