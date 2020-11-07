@@ -14,7 +14,7 @@ class AlchemyEncoder(json.JSONEncoder):
                 data = obj.__getattribute__(field)
 
                 if type(data) == datetime:
-                    fields[field] = str(data)
+                    fields[field] = str(data) + "+00:00"
                 elif type(data) == AreaName:
                     fields[field] = data.name
                 else:

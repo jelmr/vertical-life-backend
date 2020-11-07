@@ -37,9 +37,9 @@ class TimeSlotsHandler(BaseHandler):
                     .join(most_recent_time_slots,
                           and_(TimeSlot.id == most_recent_time_slots.c.id,
                                TimeSlot.created_at == most_recent_time_slots.c.max_created_at))
-            )
+            ).all()
 
-            self.write(json.dumps(time_slots.all(), cls=AlchemyEncoder))
+            self.write(json.dumps(time_slots, cls=AlchemyEncoder))
 
 
 def make_app():

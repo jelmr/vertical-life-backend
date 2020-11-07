@@ -17,7 +17,7 @@ class TimeSlot(db.Model):
     created_at = Column(DateTime, default=datetime.utcnow)
 
     def __repr__(self):
-        return f'<date={self.check_in_at.date()} slots=[{self.spots_count}/{self.free_spots}]>'
+        return f'<date={self.check_in_at} slots=[{self.free_spots}/{self.capacity}]>'
 
 db.Model.metadata.create_all(db.engine)
 
