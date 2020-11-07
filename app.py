@@ -1,4 +1,5 @@
 #!tornado/bin/python
+import argparse
 import json
 
 import tornado.ioloop
@@ -55,7 +56,13 @@ def make_app():
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--port", help="port to listen to")
+    args = parser.parse_args()
+
     # scraper = Scraper()
     app = make_app()
-    app.listen(8888)
+    port = args.port
+    print(f'Listening on port {port}')
+    app.listen(port)
     tornado.ioloop.IOLoop.current().start()
