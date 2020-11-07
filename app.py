@@ -57,7 +57,7 @@ def make_app():
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--port", help="port to listen to")
+    parser.add_argument("--port", help="port to listen to", default=8888)
     args = parser.parse_args()
 
     # scraper = Scraper()
