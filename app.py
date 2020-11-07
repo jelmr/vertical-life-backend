@@ -58,7 +58,7 @@ def make_app():
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--port", help="port to listen to", default=8888)
-    parser.add_argument("-scrape", help="whether to scrape TimeSlots from VerticalLife", type=bool)
+    parser.add_argument("-scrape", help="whether to scrape TimeSlots from VerticalLife", action='store_true')
     args = parser.parse_args()
 
     if args.scrape:
