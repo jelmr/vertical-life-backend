@@ -1,0 +1,4 @@
+app.db
+.idea
+__pycache__
+tornado
