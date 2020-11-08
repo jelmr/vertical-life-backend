@@ -7,9 +7,9 @@ from datetime import datetime
 from cachetools import TTLCache
 from tornado.httpclient import AsyncHTTPClient
 
-from db import TimeSlot
 from models.area import AreaName, Area
 from models.gym import Gym
+from models.time_slot import TimeSlot
 
 API_BASE = 'https://smcb.vertical-life.info/api/v1/gyms/74/checkins/'
 
@@ -24,7 +24,6 @@ class VerticalLifeClient:
             self.cache['gym'] = self.cache.pop('gym')
         except:
             self.cache['gym'] = await self.client.fetch(API_BASE + 'public')
-            print("[Gym] Cache miss")
         return Gym(json.loads(self.cache['gym'].body))
 
     async def get_area(self, area_name: AreaName) -> Area:

@@ -6,7 +6,6 @@ from datetime import datetime, timedelta
 
 from sqlalchemy.orm import sessionmaker
 
-from db import get_db
 from models.area import AreaName
 from vertical_life_client import VerticalLifeClient
 
@@ -14,9 +13,9 @@ LOOKAHEAD = 14
 
 
 class Scraper(object):
-    def __init__(self):
+    def __init__(self, db):
         self.vl_client = VerticalLifeClient()
-        self.db = get_db()
+        self.db = db
         thread = threading.Thread(target=self.run, args=())
         thread.start()
 
@@ -28,10 +27,7 @@ class Scraper(object):
 
     async def scrape(self):
         while True:
-            print('I sleep zzzz')
-            time.sleep(60 * 60)
-
-            print('real shit')
+            print('Scraper scraping!')
             session = sessionmaker(bind=self.db.engine)()
 
             for area in AreaName:
@@ -45,5 +41,5 @@ class Scraper(object):
             session.commit()
             session.flush()
 
-
-
+            print('Scraper sleeping')
+            time.sleep(60 * 60)
