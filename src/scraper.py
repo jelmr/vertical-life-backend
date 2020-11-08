@@ -27,6 +27,9 @@ class Scraper(object):
 
     async def scrape(self):
         while True:
+            print('Scraper sleeping')
+            time.sleep(60 * 60)
+
             print('Scraper scraping!')
             session = sessionmaker(bind=self.db.engine)()
 
@@ -40,6 +43,3 @@ class Scraper(object):
 
             session.commit()
             session.flush()
-
-            print('Scraper sleeping')
-            time.sleep(60 * 60)
