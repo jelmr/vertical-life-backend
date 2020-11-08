@@ -1,6 +1,7 @@
 #!tornado/bin/python
 import argparse
 import json
+from datetime import datetime
 
 import tornado.ioloop
 import tornado.web
@@ -22,12 +23,14 @@ class GymInfoHandler(BaseHandler):
 
 class TimeSlotsHandler(BaseHandler):
     async def get(self, area_name_raw):
+        now = datetime.utcnow()
         area_name = AreaName[area_name_raw]
         with self.make_session() as session:
             most_recent_time_slots = (
                 session
                     .query(TimeSlot.id, func.max(TimeSlot.created_at).label("max_created_at"))
                     .filter(TimeSlot.area == area_name)
+                    .filter(TimeSlot.check_in_at > now)
                     .group_by(TimeSlot.area, TimeSlot.check_in_at)
                     .subquery()
             )
